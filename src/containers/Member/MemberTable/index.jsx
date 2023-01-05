@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useState } from "react";
+import MemberDetail from "./MemberDetail";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -23,6 +25,14 @@ const rows = [
 ];
 
 const MemberTable = () => {
+  const [detailOpen, setDetailOpen] = useState(false);
+
+
+  const onDetailOpen = (id) => {
+
+    console.log(id)
+    setDetailOpen(true);
+  };
   return (
     <TableContainer component={Paper}>
       <Table
@@ -67,6 +77,7 @@ const MemberTable = () => {
                       background: "#92C66A",
                     },
                   }}
+                  onClick={() => onDetailOpen(row.id)}
                 >
                   查看詳細
                 </Button>
@@ -95,6 +106,11 @@ const MemberTable = () => {
           </TableRow>
         </TableBody>
       </Table>
+      <MemberDetail
+        open={detailOpen}
+        setDetailOpen={setDetailOpen}
+        // detailId={detailId}
+      />
     </TableContainer>
   );
 };
